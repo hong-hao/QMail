@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="ime.mail.controls.MailReader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="584" xmlns:c="clr-namespace:ime.controls;assembly=ime.controls">
+    <UserControl.Resources>
+        <DataTemplate x:Key="Record" DataType="ListItem">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Stretch="None" Source="{Binding Path=Attribute[iconUrl].Value}" Margin="1" Cursor="Hand"/>
+                <Separator Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2" Cursor="Hand">
+                    <Separator.LayoutTransform>
+                        <RotateTransform CenterX="0" CenterY="0" Angle="90" />
+                    </Separator.LayoutTransform>
+                </Separator>
+                <TextBlock Grid.Column="2" Text="{Binding Path=Attribute[label].Value}" VerticalAlignment="Center" Margin="2,1" Cursor="Hand"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Name="root">
+        <Grid.RowDefinitions>
+            <RowDefinition Name="rootRow0" Height="Auto" />
+            <RowDefinition Name="rootRow1" Height="*" />
+            <RowDefinition Name="rootRow2" Height="Auto"/>
+            <RowDefinition Name="rootRow3" Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF4FAFD" Offset="1" />
+                    <GradientStop Color="#FF7AB8DC" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="txtSubject" FontWeight="Bold" Height="23" VerticalAlignment="Center" Margin="5,2"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Name="txtDate" VerticalAlignment="Center" Margin="5,2"></TextBlock>
+                    <TextBlock Name="txtFrom" VerticalAlignment="Center" Margin="5,2"></TextBlock>
+                    <TextBlock Name="txtArea" VerticalAlignment="Center" Margin="5,2"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Margin="5,2">
+                    <TextBlock VerticalAlignment="Center">发送者：</TextBlock>
+                    <TextBlock Name="txtSender" VerticalAlignment="Center"></TextBlock>
+                    <c:SplitButton x:Name="btnGrade" Margin="10,0" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                        <StackPanel Margin="0" Orientation="Horizontal" >
+                            <Image Name="imgGrade" Margin="2,0,2,0" Stretch="None" ></Image>
+                            <TextBlock Name="txtGradeLabel" ></TextBlock>
+                        </StackPanel>
+                        <c:SplitButton.DropDownContent>
+                            <ListBox x:Name="lbGrade" ItemsSource="{Binding Elements}" BorderThickness="0" HorizontalContentAlignment="Stretch"
+                                    ItemTemplate ="{StaticResource Record}"/>
+                        </c:SplitButton.DropDownContent>
+                    </c:SplitButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="5,2">
+                    <Button x:Name="btnRemark" Content="添加备注" Margin="0" Padding="10,0,10,0" VerticalAlignment="Stretch"/>
+                    <c:SplitButton x:Name="btnHandle" Margin="10,0" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                        <StackPanel Margin="0" Orientation="Horizontal" >
+                            <Image Name="imgHandleAction" Margin="2,0,2,0" Stretch="None" ></Image>
+                            <TextBlock Name="txtHandleAction"></TextBlock>
+                        </StackPanel>
+                        <c:SplitButton.DropDownContent>
+                            <ListBox x:Name="lbHandle" ItemsSource="{Binding Elements}" BorderThickness="0" HorizontalContentAlignment="Stretch"
+                                    ItemTemplate ="{StaticResource Record}"/>
+                        </c:SplitButton.DropDownContent>
+                    </c:SplitButton>
+                    <ToggleButton x:Name="tobTranslate" Margin="10,0" Padding="10,0,10,0" VerticalAlignment="Stretch" Click="OnTranslate">翻译</ToggleButton>
+                </StackPanel>
+            </Grid>
+            <WrapPanel Name="attachments" Margin="1" Grid.Row="2"/>
+        </Grid>
+        <WebBrowser Name="webBrowser" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <GridSplitter x:Name="gridSplitter" Grid.Row="2" Height="3" Visibility="Collapsed" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+        <c:BusyIndicator Name="gridTranslate" Grid.Row="3" Visibility="Collapsed" BusyContent="正在翻译，请稍候...">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="txtTitle" Foreground="Blue"/>
+                    <Button x:Name="btnTranslateClose" Grid.Column="1" ToolTip="关闭" Margin="2" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand">
+                        <Image Source="/ime.mail;component/controls/Icons/close.png" Stretch="None"/>
+                    </Button>
+                </Grid>
+                <TextBox x:Name="txtTranslate" Grid.Row="1" AcceptsReturn="True" TextWrapping="WrapWithOverflow" 
+                     IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+        </c:BusyIndicator>
+    </Grid>
+</UserControl>

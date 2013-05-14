@@ -1,0 +1,35 @@
+﻿<q:QWindow x:Class="ime.mail.controls.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:q="clr-namespace:ime.controls.QWindow;assembly=ime.controls"
+        Style="{StaticResource QWindow}" ShowInQSTaskBar="False" ShowInTaskbar="False"
+        Title="邮件发送和接收" SizeToContent="Height" mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        Width="520" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="90" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Image Name="icon" Source="/ime.mail;component/Icons/info.png" Stretch="None" Margin="5"></Image>
+            <TextBox Background="Transparent" AcceptsReturn="True" BorderThickness="0" Name="text" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="343" IsReadOnly="True"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <ProgressBar HorizontalAlignment="Stretch" Name="progressBar" IsIndeterminate="True" VerticalAlignment="Stretch" Height="15"/>
+            <ProgressBar HorizontalAlignment="Stretch" Name="itemProgressBar" Margin="0,2,0,0" VerticalAlignment="Stretch" Height="8"/>
+        </StackPanel>
+        <StackPanel Grid.RowSpan="3" Grid.Column="1" Margin="5,0,0,0">
+            <Button Height="25" Click="OnHide">隐藏</Button>
+            <Button Height="25" Margin="0,5,0,5" Click="OnStop">停止</Button>
+            <Button Height="25" Click="OnShowDetail">详细信息</Button>
+        </StackPanel>
+        <ListBox Name="detail" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,3,0,0" Height="80"></ListBox>
+    </Grid>
+</q:QWindow>

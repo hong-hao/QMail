@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BizComponent name="ime.mail" label="邮件">
+	<!--被本组件管理的实体-->
+	<ManagedEntities>
+		<Entity name="ML_MailAccount" label="邮件帐号">
+			<property name="name" type="string" label="名称" />
+		</Entity>
+	</ManagedEntities>
+	<!--被本组件引用但由外部组件管理的实体-->
+	<RequiredEntities>
+		
+	</RequiredEntities>
+	<Functions>
+		<Function name="MailReceive" label="接收邮件">
+			<Dependences>
+				<ManagedEntity name="ML_MailAccount" />
+			</Dependences>
+			<Setting>
+				<DispatchTime type="long" label="调度时间(分)" required="true" />
+			</Setting>
+		</Function>
+	</Functions>
+</BizComponent>

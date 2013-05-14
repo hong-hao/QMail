@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension class="ime.mail.Extension">
+	<entity-event>
+		<event entityName="ML_MailAccount" class="ime.mail.extension.MailAccountEventHandler"/>
+	</entity-event>
+	<system-event>
+	</system-event>
+	<entity-implementer>
+	</entity-implementer>
+
+	<!-- 属性  -->
+	<properties>
+		<!-- 垃圾邮件的标识信息  -->
+		<property name="SPAM.Header" value="X-ad-flag:YES" />
+	</properties>
+</extension>

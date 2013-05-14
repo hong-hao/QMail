@@ -1,0 +1,54 @@
+﻿<q:QWindow x:Class="ime.mail.controls.PrincipalSelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ime.mail.controls"
+        xmlns:q="clr-namespace:ime.controls.QWindow;assembly=ime.controls"
+        Style="{StaticResource QWindow}"
+        Title="选择用户" Width="260" Height="360" MinHeight="300" MinWidth="220" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <Window.Resources>
+        <local:PrincipalSelectFieldConverter x:Key="PrincipalSelectFieldConverter"/>
+        <HierarchicalDataTemplate x:Key="CheckBoxItemTemplate" DataType="{x:Type local:PrincipalSelectFieldNode}" ItemsSource="{Binding Children, Mode=OneTime}">
+            <StackPanel Orientation="Horizontal" Height="28">
+                <CheckBox Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center"/>
+                <Image Grid.Column="0" x:Name="Thumb" Margin="2" Width="16" Height="16" VerticalAlignment="Center">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{Binding Path=., Converter={StaticResource PrincipalSelectFieldConverter}, Mode=OneTime}"/>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <ContentPresenter Content="{Binding Label}" Margin="2,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate x:Key="ItemTemplate" DataType="{x:Type local:PrincipalSelectFieldNode}" ItemsSource="{Binding Children, Mode=OneTime}">
+            <StackPanel Orientation="Horizontal" Height="28">
+                <Image Grid.Column="0" x:Name="Thumb" Margin="2" Width="16" Height="16" VerticalAlignment="Center">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="{Binding Path=., Converter={StaticResource PrincipalSelectFieldConverter}, Mode=OneTime}"/>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <ContentPresenter Content="{Binding Label}" Margin="2,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TreeView HorizontalAlignment="Stretch" x:Name="treeView" VerticalAlignment="Stretch">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                    <EventSetter Event="RequestBringIntoView" Handler="TreeViewItem_RequestBringIntoView"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Name="btnOK" Content="确定" Width="70" Margin="2,2,2,2"/>
+            <Button Name="btnCanel" Content="取消" Width="70" Margin="2,2,2,2"/>
+        </StackPanel>
+    </Grid>
+</q:QWindow>

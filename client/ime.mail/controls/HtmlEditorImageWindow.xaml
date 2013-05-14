@@ -1,0 +1,55 @@
+﻿<q:QWindow x:Class="ime.mail.controls.HtmlEditorImageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:q="clr-namespace:ime.controls.QWindow;assembly=ime.controls"
+        Style="{StaticResource QWindow}"
+        Title="图片" Height="434" Width="445" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Name="imgView" HorizontalAlignment="Stretch" Margin="1" VerticalAlignment="Stretch"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="图片源:" Width="60"/>
+                <ComboBox x:Name="cboSource" Width="125" Height="23" Margin="2"/>
+                <Label Content="宽度:"/>
+                <TextBox x:Name="txtWidth" Width="55" Height="23" Margin="2,2,0,2"/>
+                <Label Content="px"/>
+                <Label Content="高度:"/>
+                <TextBox x:Name="txtHeight" Width="55" Height="23" Margin="2,2,0,2"/>
+                <Label Content="px"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="说明(alt):"/>
+                <TextBox x:Name="txtAlt" Grid.Column="1" Margin="2" Height="23"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Content="路径:"/>
+                <TextBox x:Name="txtPath" Grid.Column="1" Margin="2" Height="23"/>
+                <Button x:Name="btnSelected" Grid.Column="2" Width="50" Content=" 选 择 " Height="23" Margin="2"/>
+            </Grid>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="2">
+            <Button x:Name="btnOK" Content=" 确 定 " Width="70" Height="23" Margin="2"/>
+            <Button x:Name="btnCancel" Content=" 取 消 " Width="70" Height="23" Margin="2"/>
+        </StackPanel>
+    </Grid>
+</q:QWindow>

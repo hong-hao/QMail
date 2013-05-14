@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<packages version="1.2">
+   <package name="ime.mail.jar" type="jar" todir="/IMEServer/WebContent/WEB-INF/lib" exploded="false" inWorkspace="true">
+      <fileset dir="bin" includes="**/*.class,**/*.xml" inWorkspace="true" flatten="false">
+         <properties></properties>
+      </fileset>
+      <properties>
+         <property name="org.jboss.ide.eclipse.as.core.packages.ModuleIDPropertyKey" value="1342762020930"></property>
+      </properties>
+   </package>
+   <properties></properties>
+</packages>
