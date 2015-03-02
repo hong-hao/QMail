@@ -19,11 +19,11 @@
 				<key>bundle-identifier</key>
 				<string>ime.acfw.lite</string>
 				<key>bundle-version</key>
-				<string>1.0</string>
+				<string>1.1</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>Complaint Free Lite</string>
+				<string>Complaint Free</string>
 			</dict>
 		</dict>
 	</array>
